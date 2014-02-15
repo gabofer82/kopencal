@@ -18,16 +18,17 @@ class CalcEngine(object):
 	def operate(self):
 		'''Return a result string. Invoqued by gui's equal button.'''
 		operation = ''
+		result = None
 		print len(self._equation)
+		# append the last value tippying by user
 		self._equation.append(self._number_buffer)
-		print self._equation
-		for item in self._equation:
+		for index, item in enumerate(self._equation):
 			operation = '%s%s' % (operation, item)
 
-		if self._isOperator(self._equation[-1]):
-			del self._equation[-1]
+			if (index % 2) == 0:
+				operation = eval(operation)
 
-		return eval(operation)
+		return operation
 
 	def cleanData(self):
 		'''Clean number_buffer variable.'''
