@@ -1,7 +1,6 @@
 #! /usr/bin/python
 
 
-
 class CalcEngine(object):
 	def __init__(self):
 		self._operators = ['+', '-', '/', '*']
@@ -11,9 +10,11 @@ class CalcEngine(object):
 	def addSymbol(self, symbol):
 		'''Add a simbol to ecuation'''
 		if self._evaluateSymbol(symbol) and len(self._number_buffer) >= 1:
-			self._equation.append(self._number_buffer)
-			self._number_buffer = ''
-			self._equation.append(symbol)
+			self._equation.append(self._number_buffer)  # here add the number to equation
+			self._equation.append(symbol)  # here add the operator to equation
+
+	def getCurNumber(self):
+		return self._number_buffer
 
 	def operate(self):
 		'''Return a result string. Invoqued by gui's equal button.'''
@@ -28,6 +29,9 @@ class CalcEngine(object):
 			if (index % 2) == 0:
 				operation = eval(operation)
 
+		operation = str(operation)
+		self.cleanData()
+		self._number_buffer = operation
 		return operation
 
 	def cleanData(self):
@@ -39,6 +43,10 @@ class CalcEngine(object):
 		if self._isOperator(symbol):
 			return True
 		else:
+			if len(self._equation) > 0:
+				if self._isOperator(self._equation[-1]):
+					self._number_buffer = ''
+			# here add the digit
 			self._number_buffer = '%s%s' % (self._number_buffer, symbol,)
 
 		return False
@@ -50,3 +58,6 @@ class CalcEngine(object):
 			return True
 
 		return False
+
+	def isOperator(self, symbol):
+		return self._isOperator(symbol)
