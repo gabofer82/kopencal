@@ -14,6 +14,8 @@ class CalcEngine(object):
 			self._equation.append(symbol)  # here add the operator to equation
 
 	def getCurNumber(self):
+		if len(self._number_buffer) == 0:
+			return '0'
 		return self._number_buffer
 
 	def operate(self):

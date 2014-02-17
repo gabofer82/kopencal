@@ -36,6 +36,7 @@ class Ui_MainWindow(object):
 "background-color:black;")
         self.txt_screen.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.txt_screen.setReadOnly(True)
+        self.txt_screen.setText('0')
         self.txt_screen.setObjectName("txt_screen")
         self.verticallyt_allcontrols.addWidget(self.txt_screen)
         self.gridlyt_opsandnums = QtGui.QGridLayout()
